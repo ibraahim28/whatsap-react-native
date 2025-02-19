@@ -7,11 +7,23 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
-import { statuses } from "../config/data";
+import React, { useEffect, useState } from "react";
+// import { statuses } from "../config/data";
 import StatusComp from "./StatusComp";
-const StatusSection = ({nav}) => {
-  console.log(nav);
+import { getStatus } from "../config/asyncStorage";
+const StatusSection = ({ nav }) => {
+
+  const [statuses, setStatuses] = useState([]);
+
+  useEffect(() => {
+    const getStatuses = async () => {
+      const storedStatuses = await getStatus();
+      setStatuses(storedStatuses);
+    }
+
+    getStatuses()
+  }, [])
+  console.log("statuses==============================", statuses)
   return (
     <View
       style={{
@@ -45,7 +57,7 @@ const StatusSection = ({nav}) => {
             alignItems: "center",
           }}
         >
-          <TouchableOpacity onPress={()=>{nav.navigate('Camera')}}>
+          <TouchableOpacity onPress={() => { nav.navigate('Camera') }}>
             <Text style={{ color: "white", fontSize: 150, opacity: 0.3 }}>
               +
             </Text>

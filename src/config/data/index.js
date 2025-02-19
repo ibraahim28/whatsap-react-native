@@ -2,6 +2,7 @@ export const statuses = [
     {
         author : 'Ibrahim',
         text : 'Hello Ibrahim',
+        photo : ''
     },
     {
         author : 'Sufiyan',
